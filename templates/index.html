@@ -7,7 +7,7 @@
 </head>
 <body>
 	<h1 id="h1"> {{ message }} </h1>
-	<h2> В форме ниже введи, пожалуйста, фразы, которые ты хочешь добавить в бота</h2>
+	<h2> В форме ниже введи, пожалуйста, фразы, которые ты хочешь добавить в бота:</h2>
 	<textarea form="changeid" name="phrases" cols="35" wrap="soft"></textarea>
 	<form action="{{ url_for('change_phrases') }}" method="post" id="changeid">
 		<input type="submit">

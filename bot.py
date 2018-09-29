@@ -67,7 +67,7 @@ def send_random_message(message):
 
 @app.route('/')
 def hello_world():
-    message = "Ксюша, приве!"
+    message = "Ксюша, привет!"
     bot.remove_webhook()
     bot.set_webhook(url='https://murmuring-ridge-70204.herokuapp.com/' + bot_token)
     return render_template("index.html", message = message)
@@ -77,10 +77,10 @@ def change_phrases():
     new_phrases = []
     phrases = request.form['phrases'].split('\r\n')
     for phrase in phrases:
-        if phrase not in typical_phrases:
+        if phrase not in typical_phrases and phrase.replace(" ","") != "":
             new_phrases.append(phrase)
             typical_phrases.append(phrase)
-    message = 'Ксюша, фразы: "%s успешно добавлены в бота!'%('", "'.join(new_phrases))
+    message = 'Ксюша, фразы: "%s" успешно добавлены в бота!'%('", "'.join(new_phrases))
     return (render_template("index.html", message = message))
     
 
