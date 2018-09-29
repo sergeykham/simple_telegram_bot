@@ -1,7 +1,10 @@
 import telebot
 import os
+import time
 import random
+import flask
 from flask import Flask
+
 app = Flask(__name__)
 
 bot_token = os.environ['BOT_TOKEN']
@@ -46,6 +49,24 @@ typical_phrases = [
     'Крууууууто! Ой, круууууто-то кааааак!',
 ]
 old_message = random.choices(typical_phrases)
+
+WEBHOOK_URL_BASE = "https://murmuring-ridge-70204.herokuapp.com"
+WEBHOOK_URL_PATH = "/%s/" % (bot_token)
+
+@app.route('/')
+def hello_world():
+    return 'Hello, World!'
+
+@app.route(WEBHOOK_URL_PATH, methods=['POST'])
+def webhook():
+    if flask.request.headers.get('content-type') == 'application/json':
+        json_string = flask.request.get_data().decode('utf-8')
+        update = telebot.types.Update.de_json(json_string)
+        bot.process_new_updates([update])
+        return ''
+    else:
+        flask.abort(403)
+
 @bot.message_handler(commands=['start','help'])
 def send_welcome(message):
     user = message.from_user.first_name
@@ -53,16 +74,20 @@ def send_welcome(message):
      "Привет, %s, я - Цифровой Олег :) Можешь задать мне вопрос!"%(user))
 
 @bot.message_handler(func=lambda message: True)
-def echo_all(message):
+def send_random_message(message):
     new_message = random.choices(typical_phrases)
     while new_message == old_message:
         new_message = random.choices(typical_phrases)
     bot.reply_to(message, new_message)
 
-@app.route('/')
-def hello_world():
-    return 'Hello, World!'
+bot.remove_webhook()
 
+time.sleep(0.1)
+
+# Set webhook
+
+bot.set_webhook(url=WEBHOOK_URL_BASE + WEBHOOK_URL_PATH)
+
+# Start flask server
 if __name__ == '__main__':
     app.run()
-    bot.polling()
