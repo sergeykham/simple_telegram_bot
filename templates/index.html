@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Bot's phrases</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+	<h1> Ксюша, привет!</h1>
+	<h2> В форме ниже введи, пожалуйста, фразы, которые ты хочешь добавить в бота</h2>
+	<form action="{{ url_for('change_phrases') }}" method="post">
+		<input type="text" name="phrases">
+		<input type="submit">
+	</form>
+</body>
+</html>

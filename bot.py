@@ -2,7 +2,7 @@ import os
 
 import telebot
 import random
-from flask import Flask, request
+from flask import Flask, request, render_template
 
 bot_token = os.environ['BOT_TOKEN']
 bot = telebot.TeleBot(bot_token)
@@ -66,8 +66,7 @@ def send_random_message(message):
 def hello_world():
     bot.remove_webhook()
     bot.set_webhook(url='https://murmuring-ridge-70204.herokuapp.com/' + bot_token)
-    return ('Ксюша, привет! Чтобы изменить фразы бота, перейди, пожалуйста, по ссылке ниже: \n' +
-    'https://murmuring-ridge-70204.herokuapp.com/change_phrases')
+    return render_template("index.html")
 
 @app.route('/change_phrases', methods=['POST'])
 def change_phrases():
