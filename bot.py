@@ -77,7 +77,7 @@ def change_phrases():
     for phrase in phrases:
         if phrase not in typical_phrases:
             typical_phrases.append(phrase)
-    return 'Ксюша, фразы %s успешно добавлены в бота!'%(', '.join(phrases))
+    return 'Ксюша, фразы: "%s успешно добавлены в бота!'%('", "'.join(phrases))
     
 
 # Process webhook calls
