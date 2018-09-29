@@ -5,8 +5,6 @@ import random
 import flask
 from flask import Flask
 
-app = Flask(__name__)
-
 bot_token = os.environ['BOT_TOKEN']
 bot = telebot.TeleBot(bot_token)
 
@@ -18,7 +16,7 @@ typical_phrases = [
     'Цифровизация',
     'Фрилансеры в Саранске',
     'Ну что, поехали?',
-    'А че, диджея не буде?',
+    'А че, диджея не будет?',
     'Спасайте! Карту по культуре!',
     'Карточки мечты',
     'Проверь на опечатки',
@@ -49,14 +47,20 @@ typical_phrases = [
     'Крууууууто! Ой, круууууто-то кааааак!',
 ]
 old_message = random.choices(typical_phrases)
+WEBHOOK_HOST = "murmuring-ridge-70204.herokuapp.com"
+WEBHOOK_PORT = 8443
+WEBHOOK_LISTEN = '0.0.0.0'
 
-WEBHOOK_URL_BASE = "https://murmuring-ridge-70204.herokuapp.com"
+WEBHOOK_URL_BASE = "https://%s:%s" % (WEBHOOK_HOST, WEBHOOK_PORT)
 WEBHOOK_URL_PATH = "/%s/" % (bot_token)
 
-@app.route('/')
+app = Flask(__name__)
+
+@app.route('/', methods=['GET','HEAD'])
 def hello_world():
     return 'Hello, World!'
 
+# Process webhook calls
 @app.route(WEBHOOK_URL_PATH, methods=['POST'])
 def webhook():
     if flask.request.headers.get('content-type') == 'application/json':
@@ -89,5 +93,6 @@ time.sleep(0.1)
 bot.set_webhook(url=WEBHOOK_URL_BASE + WEBHOOK_URL_PATH)
 
 # Start flask server
-if __name__ == '__main__':
-    app.run()
+app.run(host=WEBHOOK_LISTEN,
+        port=WEBHOOK_PORT,
+        debug=True)
