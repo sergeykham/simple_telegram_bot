@@ -62,6 +62,7 @@ def send_random_message(message):
     new_message = random.choices(typical_phrases)
     while new_message == old_message:
         new_message = random.choices(typical_phrases)
+    old_message = new_message
     bot.reply_to(message, new_message)
 
 @app.route('/')
@@ -73,7 +74,9 @@ def hello_world():
 @app.route('/change_phrases', methods=['POST'])
 def change_phrases():
     phrases = request.form['phrases'].split('\n')
-    typical_phrases.append(phrases)
+    for phrase in phrases:
+        if phrase not in typical_phrases:
+            typical_phrases.append(phrase)
     return 'Ксюша, фразы %s успешно добавлены в бота!'%(phrases)
     
 
