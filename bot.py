@@ -12,4 +12,4 @@ def send_welcome(message):
 def echo_all(message):
     bot.reply_to(message, message.text)
 
-bot.polling()
+#bot.polling()
