@@ -4,7 +4,7 @@ import random
 from flask import Flask
 app = Flask(__name__)
 
-"""bot_token = os.environ['BOT_TOKEN']
+bot_token = os.environ['BOT_TOKEN']
 bot = telebot.TeleBot(bot_token)
 
 typical_phrases = [
@@ -58,11 +58,11 @@ def echo_all(message):
     while new_message == old_message:
         new_message = random.choices(typical_phrases)
     bot.reply_to(message, new_message)
-"""
+
 @app.route('/')
 def hello_world():
     return 'Hello, World!'
 
 if __name__ == '__main__':
     app.run()
-    #bot.polling()
+    bot.polling()
