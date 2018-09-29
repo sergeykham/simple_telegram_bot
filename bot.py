@@ -67,19 +67,21 @@ def send_random_message(message):
 
 @app.route('/')
 def hello_world():
+    message = "Ксюша, приве!"
     bot.remove_webhook()
     bot.set_webhook(url='https://murmuring-ridge-70204.herokuapp.com/' + bot_token)
-    return render_template("index.html")
+    return render_template("index.html", message = message)
 
 @app.route('/change_phrases', methods=['POST'])
 def change_phrases():
-    phrases = request.form['phrases'].split('\n')
+    new_phrases = []
+    phrases = request.form['phrases'].split('\r\n')
     for phrase in phrases:
         if phrase not in typical_phrases:
-            phrase.replace('\r','')
+            new_phrases.append(phrase)
             typical_phrases.append(phrase)
-    return ('Ксюша, фразы: "%s успешно добавлены в бота!'%('", "'.join(phrases)),
-        render_template("index.html"))
+    message = 'Ксюша, фразы: "%s успешно добавлены в бота!'%('", "'.join(new_phrases))
+    return (render_template("index.html", message = message))
     
 
 # Process webhook calls
