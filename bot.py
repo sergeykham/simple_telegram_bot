@@ -60,6 +60,7 @@ def send_welcome(message):
 @bot.message_handler(func=lambda message: True)
 def send_random_message(message):
     new_message = random.choices(typical_phrases)
+    global old_message
     while new_message == old_message:
         new_message = random.choices(typical_phrases)
     old_message = new_message
