@@ -73,11 +73,11 @@ def hello_world():
 
 @app.route('/change_phrases', methods=['POST'])
 def change_phrases():
-    phrases = request.form['phrases'].split('\n')
+    phrases = request.form['phrases'].split('\r\n')
     for phrase in phrases:
         if phrase not in typical_phrases:
             typical_phrases.append(phrase)
-    return 'Ксюша, фразы %s успешно добавлены в бота!'%(phrases)
+    return 'Ксюша, фразы %s успешно добавлены в бота!'%(', '.join(phrases))
     
 
 # Process webhook calls
