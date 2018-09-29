@@ -16,6 +16,7 @@ body {
 }
 
 input[type=submit] {
+  -webkit-appearance: none;
   margin-top: 10px;
   font-size: 12px;
 }

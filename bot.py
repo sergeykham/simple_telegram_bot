@@ -80,7 +80,10 @@ def change_phrases():
         if phrase not in typical_phrases and phrase.replace(" ","") != "":
             new_phrases.append(phrase)
             typical_phrases.append(phrase)
-    message = 'Ксюша, фразы: "%s" успешно добавлены в бота!'%('", "'.join(new_phrases))
+    if len(new_phrases) > 0:
+        message = 'Ксюша, фразы: "%s" успешно добавлены в бота!'%('", "'.join(new_phrases))
+    else:
+        message = 'Ксюша, среди введенных фраз нет новых.')
     return (render_template("index.html", message = message))
     
 
