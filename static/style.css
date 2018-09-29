@@ -1,0 +1,22 @@
+textarea{  
+  /* box-sizing: padding-box; */
+  overflow:hidden;
+  /* demo only: */
+  padding:20px;
+  width:250px;
+  font-size:14px;
+  margin:10px auto;
+
+  border-radius:10px;
+  border:2px solid;
+}
+
+body {
+  margin-left: 30px;
+}
+
+input[type=submit] {
+  margin-top: 10px;
+  padding: 10px;
+  font-size: 30px;
+}
