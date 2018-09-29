@@ -83,7 +83,7 @@ def change_phrases():
     if len(new_phrases) > 0:
         message = 'Ксюша, фразы: "%s" успешно добавлены в бота!'%('", "'.join(new_phrases))
     else:
-        message = 'Ксюша, среди введенных фраз нет новых.')
+        message = 'Ксюша, среди введенных фраз нет новых.'
     return (render_template("index.html", message = message))
     
 
