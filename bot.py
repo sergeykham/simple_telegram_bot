@@ -43,13 +43,16 @@ typical_phrases = [
     'Это не на сейчас, это в дальний бэклог!',
     'Крууууууто! Ой, круууууто-то кааааак!',
 ]
-
+old_message = random.choices(typical_phrases)
 @bot.message_handler(commands=['start','help'])
 def send_welcome(message):
     bot.reply_to(message, "Howdy, how are you doing?")
 
 @bot.message_handler(func=lambda message: True)
 def echo_all(message):
-    bot.reply_to(message, random.choices(typical_phrases))
+    new_message = random.choices(typical_phrases)
+    while new_message == old_message:
+        new_message = random.choices(typical_phrases)
+    bot.reply_to(message, new_message)
 
 bot.polling()
