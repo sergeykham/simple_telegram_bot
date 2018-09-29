@@ -7,7 +7,7 @@ from flask import Flask, request, render_template
 bot_token = os.environ['BOT_TOKEN']
 bot = telebot.TeleBot(bot_token)
 
-"""typical_phrases = [
+typical_phrases = [
     'Гениально',
     'Цвета говно',
     'Сообщение удалено',
@@ -45,8 +45,7 @@ bot = telebot.TeleBot(bot_token)
     'Это не на сейчас, это в дальний бэклог!',
     'Крууууууто! Ой, круууууто-то кааааак!',
 ]
-"""
-typical_phrases = ["Тест"]
+
 old_message = random.choices(typical_phrases)
 
 app = Flask(__name__)
