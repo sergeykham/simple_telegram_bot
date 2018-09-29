@@ -63,4 +63,6 @@ def echo_all(message):
 def hello_world():
     return 'Hello, World!'
 
-bot.polling()
+if __name__ == '__main__':
+    app.run()
+    bot.polling()
