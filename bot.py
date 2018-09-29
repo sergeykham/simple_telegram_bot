@@ -46,7 +46,9 @@ typical_phrases = [
 old_message = random.choices(typical_phrases)
 @bot.message_handler(commands=['start','help'])
 def send_welcome(message):
-    bot.reply_to(message, "Howdy, how are you doing?")
+    user = message.from_user.first_name
+    bot.reply_to(message,
+     "Привет, %s, я - Цифровой Олег :) Можешь задать мне вопрос!"%(user))
 
 @bot.message_handler(func=lambda message: True)
 def echo_all(message):
