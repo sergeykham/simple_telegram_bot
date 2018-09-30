@@ -54,7 +54,8 @@ app = Flask(__name__)
 def save_phrases(file_name, phrases):
     with open (file_name, 'w') as f:
         for phrase in phrases:
-            f.write("%\n" % phrase)
+            f.write("%s\n" % phrase)
+            
 
 @bot.message_handler(commands=['start','help'])
 def send_welcome(message):
