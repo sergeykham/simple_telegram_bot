@@ -4,7 +4,7 @@ import telebot
 import random
 from flask import Flask, request, render_template
 
-web_url = os.environ['WEB_URL']
+WEB_URL = os.environ['WEB_URL']
 bot_token = os.environ['BOT_TOKEN']
 bot = telebot.TeleBot(bot_token)
 
