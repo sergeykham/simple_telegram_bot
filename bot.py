@@ -51,6 +51,11 @@ old_message = random.choices(typical_phrases)
 
 app = Flask(__name__)
 
+def save_phrases(file_name, phrases):
+    with open (file_name, 'w') as f:
+        for phrase in phrases:
+            f.write("%\n" % phrase)
+
 @bot.message_handler(commands=['start','help'])
 def send_welcome(message):
     user = message.from_user.first_name
@@ -83,7 +88,7 @@ def change_phrases():
             typical_phrases.append(phrase)
     if len(new_phrases) > 0:
         message = 'Ксюша, фразы: "%s" успешно добавлены в бота!'%('", "'.join(new_phrases))
-        os.environ['TYPICAL_PHRASES'] = ','.join(typical_phrases)
+        save_phrases('saved_phrases.txt', typical_phrases)
     else:
         message = 'Ксюша, среди введенных фраз нет новых.'
     return (render_template("index.html", message = message))
