@@ -48,7 +48,7 @@ typical_phrases = [
     'Крууууууто! Ой, круууууто-то кааааак!',
 ]
 #%(','.join(typical_phrases))
-subprocess.call('heroku config:set PHRASES=%s'%'lol',
+subprocess.call('heroku config:set PHRASES=lol',
     shell=True)
 old_message = random.choices(typical_phrases)
 
