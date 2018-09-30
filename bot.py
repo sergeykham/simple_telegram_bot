@@ -3,6 +3,7 @@ import os
 import telebot
 import random
 from flask import Flask, request, render_template
+import subprocess
 
 WEB_URL = os.environ['WEB_URL']
 bot_token = os.environ['BOT_TOKEN']
@@ -47,6 +48,7 @@ typical_phrases = [
     'Крууууууто! Ой, круууууто-то кааааак!',
 ]
 
+subprocess.call(['heroku config:set PHRASES=%s'%(','.join(typical_phrases))])
 old_message = random.choices(typical_phrases)
 
 app = Flask(__name__)
@@ -55,6 +57,7 @@ app = Flask(__name__)
     with open (file_name, 'w') as f:
         for phrase in phrases:
             f.write("%s\n" % phrase)"""
+
 
 
 @bot.message_handler(commands=['start','help'])
@@ -90,6 +93,7 @@ def change_phrases():
     if len(new_phrases) > 0:
         message = 'Ксюша, фразы: "%s" успешно добавлены в бота!'%('", "'.join(new_phrases))
         #save_phrases('saved_phrases.txt', typical_phrases)
+
     else:
         message = 'Ксюша, среди введенных фраз нет новых.'
     return (render_template("index.html", message = message))
