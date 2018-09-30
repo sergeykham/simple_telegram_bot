@@ -48,7 +48,8 @@ typical_phrases = [
     'Крууууууто! Ой, круууууто-то кааааак!',
 ]
 
-subprocess.call(['heroku config:set PHRASES=%s'%(','.join(typical_phrases))])
+subprocess.call('heroku config:set PHRASES=%s'%(','.join(typical_phrases)),
+    shell=True)
 old_message = random.choices(typical_phrases)
 
 app = Flask(__name__)
